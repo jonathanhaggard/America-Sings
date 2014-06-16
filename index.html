@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>America Sings</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/png" href="apple-touch-icon-precomposed.png">
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+		<script src="js/jquery.cursometer.1.0.0.js"></script>
+		<script src="js/popcorn.min.js"></script>
+        <script src="js/main.js"></script>
+		
+		<script>
+		
+		$(function grabSpeed() {
+		
+		    var $speedometer = $('#speedometer');
+		    $('#test-area').cursometer({
+		        onUpdateSpeed: function(speed) {
+		            $speedometer.text(speed);
+		           
+		            console.log( speed );
+		            
+                    var popcorn = Popcorn( "#myaudiohook" );
+                    
+         			popcorn.playbackRate( speed );
+         			
+         			popcorn.autoplay( true );
+		            
+		        },
+		        updateSpeedRate: 20
+		    });
+		});
+				
+         document.addEventListener( "DOMContentLoaded", function() {
+ 
+
+ 
+ 
+         }, false );
+
+		</script>
+		
+		<script>
+		var colorArray = ["#0266C8","#F90101","#F2B50F","#00933B"];
+		$(document).mousemove(function(event){  
+		  var curColor = colorArray[Math.floor(Math.random()*colorArray.length)];
+		  var curX = event.pageX;
+		  var curY = event.pageY;
+		  var width = height = Math.random()*50;
+		  var item = $("<span></span>").css({"left":curX,"top":curY,"width":width,"height":height,"backgroundColor":curColor});
+		  setTimeout(function(){
+		    item.fadeOut().remove();
+		  },500);
+		  $("body").append(item);
+		});
+		
+		$(".clear-button").on("click",function(){
+		  $("body span").remove();
+		});
+		
+		
+		</script>
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+<div class="container">
+
+	<div class="logo"></div>
+
+</div>
+
+<div id="test-area"></div>
+<div id="speedometer"></div>
+<audio controls id="myaudiohook" >
+  <source src="js/mysong.ogg" type="audio/ogg">
+  <source src="js/mysong.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+
+
+
+    </body>
+</html>
