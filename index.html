@@ -25,17 +25,25 @@
 		    $('#test-area').cursometer({
 		        onUpdateSpeed: function(speed) {
 		            $speedometer.text(speed);
+		            updateSpeedRate: 100000;
 		           
-		            console.log( speed );
 		            
                     var popcorn = Popcorn( "#myaudiohook" );
                     
-         			popcorn.playbackRate( speed );
+                    var keeppositive = Math.abs(speed);
+                    
+                    var limit = Math.min(Math.max(parseFloat(keeppositive), 0), 1.9);
+                    
+                    var volcontrol = Math.min(Math.max(parseFloat(keeppositive), 0), 1);
+                    
+         			popcorn.playbackRate( limit );
+         			popcorn.volume( volcontrol );
          			
          			popcorn.autoplay( true );
 		            
+		            console.log( limit );
+		            
 		        },
-		        updateSpeedRate: 20
 		    });
 		});
 				
