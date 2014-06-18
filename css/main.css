@@ -218,8 +218,46 @@ span {
   display:inline-block;
   border-radius:50%;
   background: red;
-  box-shadow:0 0 10px 0 rgba(0,0,0,.3);
   margin:4px;
+  
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  
+  -webkit-animation-name: fader;
+  animation-name: fader;
+      
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  
+}
+
+
+@-webkit-keyframes fader {
+	0% {
+	opacity: 1;
+	}
+	
+	50%{
+		opacity: 0;
+	}
+	100% {
+	opacity: 0;
+	}
+}
+
+@keyframes fader {
+	0% {
+	  opacity: 1;
+	}
+	
+	50%{
+		opacity: 0;
+	}
+	100% {
+	  opacity: 0;
+	}
 }
 
 /* ==========================================================================

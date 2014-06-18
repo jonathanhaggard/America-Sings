@@ -205,8 +205,8 @@
 	 * Configuration options for plug-in
 	 */
 	var _options = {
-		updateSpeedRate: 20,
-		captureMouseMoveRate: 15,
+		updateSpeedRate: 20000,
+		captureMouseMoveRate: 15000,
 		onUpdateSpeed: $.noop
 	};
 

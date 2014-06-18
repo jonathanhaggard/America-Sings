@@ -22,29 +22,36 @@
 		$(function grabSpeed() {
 		
 		    var $speedometer = $('#speedometer');
+		    
 		    $('#test-area').cursometer({
+		    		    
 		        onUpdateSpeed: function(speed) {
 		            $speedometer.text(speed);
-		           
-		            console.log( speed );
+		            
 		            
                     var popcorn = Popcorn( "#myaudiohook" );
                     
-         			popcorn.playbackRate( speed );
+                    var keeppositive = Math.abs(speed);
+                    
+                    var limit = Math.min(Math.max(parseFloat(keeppositive), .5), 1.9);
+                    
+                    var volcontrol = Math.min(Math.max(parseFloat(keeppositive), .5), 1);
+                    
+                    setInterval(limit, 20000);
+                    setInterval(volcontrol, 20000);
+         			popcorn.playbackRate( limit );
+         			popcorn.volume( volcontrol );
          			
          			popcorn.autoplay( true );
 		            
+		            console.log( limit );
+		            
 		        },
-		        updateSpeedRate: 20
 		    });
+		    
 		});
-				
-         document.addEventListener( "DOMContentLoaded", function() {
- 
+		
 
- 
- 
-         }, false );
 
 		</script>
 		
@@ -58,13 +65,13 @@
 		  var item = $("<span></span>").css({"left":curX,"top":curY,"width":width,"height":height,"backgroundColor":curColor});
 		  setTimeout(function(){
 		    item.fadeOut().remove();
-		  },500);
+		  },5000);
 		  $("body").append(item);
 		});
 		
-		$(".clear-button").on("click",function(){
-		  $("body span").remove();
-		});
+//		$(".clear-button").on("click",function(){
+//		  $("body span").remove();
+//		});
 		
 		
 		</script>
