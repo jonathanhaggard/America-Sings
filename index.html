@@ -12,66 +12,27 @@
 		<link rel="icon" type="image/png" href="apple-touch-icon-precomposed.png">
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="js/jquery.cursometer.1.0.0.js"></script>
 		<script src="js/popcorn.min.js"></script>
+		<script src="js/propeller.js"></script>
         <script src="js/main.js"></script>
 		
-		<script>
-		
-		$(function grabSpeed() {
-		
-		    var $speedometer = $('#speedometer');
-		    
-		    $('#test-area').cursometer({
-		    		    
-		        onUpdateSpeed: function(speed) {
-		            $speedometer.text(speed);
-		            
-		            
-                    var popcorn = Popcorn( "#myaudiohook" );
-                    
-                    var keeppositive = Math.abs(speed);
-                    
-                    var limit = Math.min(Math.max(parseFloat(keeppositive), .5), 1.9);
-                    
-                    var volcontrol = Math.min(Math.max(parseFloat(keeppositive), .5), 1);
-                    
-                    setInterval(limit, 20000);
-                    setInterval(volcontrol, 20000);
-         			popcorn.playbackRate( limit );
-         			popcorn.volume( volcontrol );
-         			
-         			popcorn.autoplay( true );
-		            
-		            console.log( limit );
-		            
-		        },
-		    });
-		    
-		});
-		
 
-
-		</script>
 		
 		<script>
-		var colorArray = ["#0266C8","#F90101","#F2B50F","#00933B"];
+		var colorArray = ["#fff","#fff","#fff","#fff"];
 		$(document).mousemove(function(event){  
 		  var curColor = colorArray[Math.floor(Math.random()*colorArray.length)];
 		  var curX = event.pageX;
 		  var curY = event.pageY;
-		  var width = height = Math.random()*50;
+		  var width = height = Math.random()*10;
 		  var item = $("<span></span>").css({"left":curX,"top":curY,"width":width,"height":height,"backgroundColor":curColor});
 		  setTimeout(function(){
 		    item.fadeOut().remove();
 		  },5000);
 		  $("body").append(item);
 		});
-		
-//		$(".clear-button").on("click",function(){
-//		  $("body span").remove();
-//		});
 		
 		
 		</script>
@@ -82,11 +43,12 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-<div class="container">
+<!--<div class="container">
 
 	<div class="logo"></div>
 
-</div>
+
+</div>-->
 
 <div id="test-area"></div>
 <div id="speedometer"></div>
@@ -95,8 +57,73 @@
   <source src="js/mysong.mp3" type="audio/mpeg">
   Your browser does not support the audio tag.
 </audio>
+<div class="recordholder">
+	<div class="spinholder">
+	<img id="record" src="./img/turbine.png">
+	</div>
+</div>
+		<script>
+		var popcorn = Popcorn( "#myaudiohook" );
+		popcorn.autoplay( true );
+		$(function grabSpeed() {
+		
+		    var $speedometer = $('#speedometer');
+		    
+		    $('#test-area').cursometer({
+   
+		        onUpdateSpeed: function(speed) {
+							$speedometer.text(speed);
+								
+							
+							
+							var popcorn = Popcorn( "#myaudiohook" );
+							
+							var keeppositive = Math.abs(speed);
+							
+							var limit = Math.min(Math.max(parseFloat(keeppositive), .5), 1.9);
+							
+							var volcontrol = Math.min(Math.max(parseFloat(keeppositive), .5), 1);
+							
+							popcorn.playbackRate( limit );
+							popcorn.volume( volcontrol );
+							
+							popcorn.autoplay( true );
+							
+							console.log( limit );
+							
+
+		            
+		        },
+		    });
+		    
+		});
+		
+var img = $('#record');
+if(img.length > 0){
+    var offset = img.offset();
+    function mouse(evt){
+        var center_x = (offset.left) + (img.width()/2);
+        var center_y = (offset.top) + (img.height()/2);
+        var mouse_x = evt.pageX; var mouse_y = evt.pageY;
+        var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
+        var degree = (radians * (180 / Math.PI) * -1) + 90; 
+        img.css('-moz-transform', 'rotate('+degree+'deg)');
+        img.css('-webkit-transform', 'rotate('+degree+'deg)');
+        img.css('-o-transform', 'rotate('+degree+'deg)');
+        img.css('-ms-transform', 'rotate('+degree+'deg)');
+    }
+    $(document).mousemove(mouse);
+}
 
 
+		</script>
+
+<script>
+//new Propeller(document.getElementById('record'), {
+//inertia: .8,
+//minimalSpeed: .5
+//});
+</script>
 
     </body>
 </html>
